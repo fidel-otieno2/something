@@ -377,7 +377,7 @@
       <a class="btn-primary" href="https://wa.me/254729569010?text=Florence+said+YES+%F0%9F%A4%8D%F0%9F%A4%8D" target="_blank" rel="noopener">
         Tell Fidel 💬
       </a>
-      <a class="btn-ghost" href="gallery.html" style="margin-top:12px">Enter Our Space 🤍</a>
+      <a class="btn-ghost" href="/gallery" style="margin-top:12px">Enter Our Space 🤍</a>
     </div>
   </section>
 
@@ -394,7 +394,7 @@
       <a class="btn-ghost" href="https://wa.me/254729569010?text=Florence+is+thinking+about+it+%F0%9F%8C%B8" target="_blank" rel="noopener">
         Let Fidel know 💬
       </a>
-      <a class="btn-ghost" href="gallery.html" style="margin-top:12px">Enter Our Space 🤍</a>
+      <a class="btn-ghost" href="/gallery" style="margin-top:12px">Enter Our Space 🤍</a>
     </div>
   </section>
 
@@ -418,10 +418,22 @@
 
   <script src="/app.js"></script>
   <script>
-    // Auth guard — if not logged in, go to login
     if (!localStorage.getItem('ff_token')) {
-      window.location.href = 'login.html';
+      window.parent.postMessage('goto:login', '*');
     }
+    // Intercept /gallery and /login anchor clicks and notify React parent
+    document.addEventListener('click', function(e) {
+      const a = e.target.closest('a[href]');
+      if (!a) return;
+      if (a.getAttribute('href') === '/gallery') {
+        e.preventDefault();
+        window.parent.postMessage('goto:gallery', '*');
+      }
+      if (a.getAttribute('href') === '/login') {
+        e.preventDefault();
+        window.parent.postMessage('goto:login', '*');
+      }
+    });
   </script>
 </body>
 </html>
