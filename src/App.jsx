@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './AuthContext';
-import Login   from './pages/Login';
-import Slides  from './pages/Slides';
-import Gallery from './pages/Gallery';
+import Login         from './pages/Login';
+import Slides        from './pages/Slides';
+import Gallery       from './pages/Gallery';
+import InstallPrompt from './components/InstallPrompt';
 
 function PrivateRoute({ children }) {
   const { token } = useAuth();
@@ -21,6 +22,7 @@ function RootRedirect() {
 export default function App() {
   return (
     <AuthProvider>
+      <InstallPrompt />
       <BrowserRouter>
         <Routes>
           <Route path="/"        element={<RootRedirect />} />
