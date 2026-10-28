@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="For Florence" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>For Florence 🤍</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#c9748a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <div id="petals-layer" aria-hidden="true"></div>
+  <div id="sparkle-layer" aria-hidden="true"></div>
+
+  <button id="music-btn" aria-label="Toggle music" title="Toggle music">
+    <span id="music-icon">♪</span>
+  </button>
+  <audio id="bg-music" loop>
+    <source src="/music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- progress bar -->
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+
+  <!-- ═══ SCREEN 0 — WELCOME ═══ -->
+  <section class="screen active" id="screen-welcome">
+    <div class="screen-inner center-all">
+      <div class="welcome-envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-body"><span class="envelope-heart">🤍</span></div>
+      </div>
+      <h1 class="welcome-title fade-up">Hi Florence <span class="gold">🤍</span></h1>
+      <p class="welcome-sub fade-up delay-1">Fidel made something just for you.</p>
+      <p class="welcome-hint fade-up delay-2">Tap to open it like a gift.</p>
+      <button class="btn-primary fade-up delay-3" onclick="goTo('screen-why')">Open 🎁</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 1 — WHY HER ═══ -->
+  <section class="screen" id="screen-why">
+    <div class="screen-inner">
+      <p class="section-label">Why you, Florence</p>
+      <h2 class="section-title">The things about you<br/>I can't stop thinking about.</h2>
+      <div class="cards-track" id="cards-track">
+        <div class="why-card" data-index="0">
+          <span class="card-num">01</span>
+          <p class="card-text">The way you love reggae — not just as music, but as a <em>feeling</em>. It tells me your soul is calm, deep, and beautifully real.</p>
+        </div>
+        <div class="why-card" data-index="1">
+          <span class="card-num">02</span>
+          <p class="card-text">You're sensitive with words. Melancholic lines, nostalgic phrases — you don't just read them, you <em>feel</em> them. That's rare.</p>
+        </div>
+        <div class="why-card" data-index="2">
+          <span class="card-num">03</span>
+          <p class="card-text">The way you talk — charming, direct, curious, always asking the next question. Conversations with you never feel like small talk.</p>
+        </div>
+        <div class="why-card" data-index="3">
+          <span class="card-num">04</span>
+          <p class="card-text">Your voice. Electrifying and happy at the same time. I heard it once and I haven't stopped smiling since.</p>
+        </div>
+        <div class="why-card" data-index="4">
+          <span class="card-num">05</span>
+          <p class="card-text">You love being loved — and Florence, you deserve to be loved so well. That's not a small thing. That's everything.</p>
+        </div>
+        <div class="why-card" data-index="5">
+          <span class="card-num">06</span>
+          <p class="card-text">I'm still discovering you, layer by layer. And every layer I find makes me want to find the next one.</p>
+        </div>
+      </div>
+      <div class="card-dots" id="card-dots"></div>
+      <button class="btn-primary mt-lg" onclick="goTo('screen-wanted')">Next →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 2 — WANTED POSTER ═══ -->
+  <section class="screen" id="screen-wanted">
+    <div class="screen-inner center-all">
+      <p class="section-label">Breaking News 🚨</p>
+      <div class="wanted-poster">
+        <div class="wanted-header">⚠️ WANTED ⚠️</div>
+        <div class="wanted-monogram">F.G.</div>
+        <div class="wanted-name">Florence Gathoni</div>
+        <div class="wanted-alias">a.k.a. "The One Who Ruined Fidel's Focus"</div>
+        <div class="wanted-crimes">
+          <p class="wanted-crimes-title">Crimes committed:</p>
+          <ul>
+            <li>🔴 Having a voice that's dangerously electrifying</li>
+            <li>🔴 Asking questions that make people think too hard</li>
+            <li>🔴 Being too friendly — it should be illegal</li>
+            <li>🔴 Loving reggae in a way that makes it feel personal</li>
+            <li>🔴 Saying "Damn 😝🙈" and making someone's whole week</li>
+            <li>🔴 Being from Ruiru and somehow taking up space in someone's head in a completely different city</li>
+          </ul>
+        </div>
+        <div class="wanted-reward">REWARD: One honest conversation 🤍</div>
+      </div>
+      <button class="btn-primary mt-lg" onclick="goTo('screen-facts')">Next →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 3 — FLORENCE FACTS ═══ -->
+  <section class="screen" id="screen-facts">
+    <div class="screen-inner">
+      <p class="section-label">Wikipedia (unofficial)</p>
+      <h2 class="section-title">Florence Gathoni —<br/><span class="gold italic">Fun Facts</span></h2>
+      <div class="facts-list">
+        <div class="fact-card">
+          <span class="fact-emoji">📚</span>
+          <p>Florence has read more novels than most people have had hot meals. Scientists believe she absorbs the emotions of every character she reads. This explains everything.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🎵</span>
+          <p>Florence's reggae playlist has been scientifically proven to lower blood pressure, increase calmness, and make whoever hears it feel like life is actually okay.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🗣️</span>
+          <p>Florence can hold a conversation for exactly as long as she wants to. She has never once run out of things to say. Researchers are baffled.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🧠</span>
+          <p>Florence asks questions that make you feel like you're being interviewed for a job you really want. The job is: being her friend. The competition is fierce.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">😂</span>
+          <p>Florence's roasts are so friendly that people thank her afterwards. This is a documented phenomenon known as the "Gathoni Effect."</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">📍</span>
+          <p>Florence is from Ruiru. Ruiru has never been the same since. Neither has Fidel.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🎓</span>
+          <p>Florence is an incoming candidate, anxiously waiting to be done with high school. The world outside is not ready. It has been warned.</p>
+        </div>
+      </div>
+      <button class="btn-primary mt-lg" onclick="goTo('screen-confessions')">Next →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 4 — FIDEL'S CONFESSIONS ═══ -->
+  <section class="screen" id="screen-confessions">
+    <div class="screen-inner">
+      <p class="section-label">A confession booth 😭</p>
+      <h2 class="section-title">Things Fidel has<br/><span class="gold italic">definitely NOT done.</span></h2>
+      <p class="section-sub">These are all completely false. Allegedly.</p>
+      <div class="confession-list">
+        <div class="confession-item" onclick="this.classList.toggle('revealed')">
+          <span class="confession-lock">🔒</span>
+          <p class="confession-text">Replayed Florence's voice note more than 5 times in a row just to hear her laugh.</p>
+          <span class="confession-tap">tap to reveal</span>
+        </div>
+        <div class="confession-item" onclick="this.classList.toggle('revealed')">
+          <span class="confession-lock">🔒</span>
+          <p class="confession-text">Smiled at his phone like an idiot in public after Florence said "Damn, I didn't expect that."</p>
+          <span class="confession-tap">tap to reveal</span>
+        </div>
+        <div class="confession-item" onclick="this.classList.toggle('revealed')">
+          <span class="confession-lock">🔒</span>
+          <p class="confession-text">Googled "how to describe someone perfectly" before their first call. Then threw away the notes because Florence was better than anything he prepared.</p>
+          <span class="confession-tap">tap to reveal</span>
+        </div>
+        <div class="confession-item" onclick="this.classList.toggle('revealed')">
+          <span class="confession-lock">🔒</span>
+          <p class="confession-text">Started listening to reggae after talking to Florence. Just to understand her better. He now has a playlist.</p>
+          <span class="confession-tap">tap to reveal</span>
+        </div>
+        <div class="confession-item" onclick="this.classList.toggle('revealed')">
+          <span class="confession-lock">🔒</span>
+          <p class="confession-text">Told his friends "she's just a friend" while building her a whole entire PWA app with confetti and a heart-catching game.</p>
+          <span class="confession-tap">tap to reveal</span>
+        </div>
+        <div class="confession-item" onclick="this.classList.toggle('revealed')">
+          <span class="confession-lock">🔒</span>
+          <p class="confession-text">Thought about what it would be like to meet Florence in person approximately 47 times. The number is growing.</p>
+          <span class="confession-tap">tap to reveal</span>
+        </div>
+      </div>
+      <button class="btn-primary mt-lg" onclick="goTo('screen-moments')">Next →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 5 — OUR MOMENTS ═══ -->
+  <section class="screen" id="screen-moments">
+    <div class="screen-inner">
+      <p class="section-label">Our moments</p>
+      <h2 class="section-title">Small things that<br/>meant everything.</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-tag">The first call 📞</span>
+            <p>30 minutes. You were cool, easy, real. I couldn't stop smiling the whole time — and for a long time after.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-tag">When you said that 🥹</span>
+            <p>"Damn 😝🙈 I didn't expect that. You know what, you are the first person to describe me like that even in a paragraph."</p>
+            <p class="timeline-note">— Florence Gathoni, being Florence Gathoni.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-tag">Every time you're friendly 🌸</span>
+            <p>You never make it feel like effort. You're just warm. Naturally. And that pulls people in without you even trying.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-tag">The chapter we haven't written yet ✨</span>
+            <p>We haven't met. But I already know meeting you will be one of those moments I'll want to remember forever.</p>
+          </div>
+        </div>
+      </div>
+      <div class="monogram-frame">
+        <div class="monogram-ring"></div>
+        <div class="monogram-inner">
+          <span class="monogram-initials">F.G.</span>
+          <span class="monogram-name">Florence 🤍</span>
+        </div>
+      </div>
+      <button class="btn-primary mt-lg" onclick="goTo('screen-letter')">Next →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 6 — THE LETTER ═══ -->
+  <section class="screen" id="screen-letter">
+    <div class="screen-inner">
+      <p class="section-label">A letter</p>
+      <h2 class="section-title">From Fidel,<br/>with everything.</h2>
+      <div class="letter-card">
+        <p class="letter-salutation">Florence,</p>
+        <p>I don't know exactly when it happened — but somewhere between your voice on that first call, the way you asked questions like you actually wanted to know, and the way you said you'd never been described like that before... I got attached.</p>
+        <p>Not in a scary way. In the way where I find myself thinking about you when a song comes on. In the way where I notice things about you and file them away like they're precious. In the way where I genuinely want to know every layer of you — the calm ones, the deep ones, the ones you haven't shown anyone yet.</p>
+        <p>You love reggae and novels and being loved well. Florence, I want to be someone who loves you well. Not perfectly — but honestly, and with everything I have.</p>
+        <p>I know where things stand. I'm not asking you to upend your world. I just needed you to know that you are seen, and appreciated, and that someone out here thinks you're something really special.</p>
+        <p>You deserve to hear that. Often.</p>
+        <p class="letter-sign">— Fidel Martins 🤍</p>
+      </div>
+      <button class="btn-primary mt-lg" onclick="goTo('screen-quiz')">Next →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 7 — QUIZ ═══ -->
+  <section class="screen" id="screen-quiz">
+    <div class="screen-inner center-all">
+      <p class="section-label">Pop quiz 📝</p>
+      <h2 class="section-title">How well do you<br/>know Fidel?</h2>
+      <p class="section-sub">Be honest. He'll know. 👀</p>
+      <div id="quiz-container"></div>
+      <div id="quiz-result" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 8 — RATE FIDEL ═══ -->
+  <section class="screen" id="screen-rate">
+    <div class="screen-inner center-all">
+      <p class="section-label">The moment of truth 😬</p>
+      <h2 class="section-title">Rate Fidel<br/><span class="gold italic">out of 10.</span></h2>
+      <p class="section-sub">Be honest. He can take it. Probably.</p>
+      <div class="rate-display" id="rate-display">5</div>
+      <div class="rate-emoji" id="rate-emoji">😐</div>
+      <input type="range" min="1" max="10" value="5" class="rate-slider" id="rate-slider" oninput="updateRating(this.value)" />
+      <div class="rate-labels"><span>1 😬</span><span>10 🥰</span></div>
+      <p class="rate-reaction" id="rate-reaction">Hmm... a solid 5. Fidel is nervously sweating.</p>
+      <button class="btn-primary" onclick="submitRating()">Lock it in 🔒</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 9 — HER OPINION ═══ -->
+  <section class="screen" id="screen-opinion">
+    <div class="screen-inner center-all">
+      <p class="section-label">Your turn to talk 🎤</p>
+      <h2 class="section-title">What do you actually<br/>think of Fidel?</h2>
+      <p class="section-sub">Type anything. He'll read every word. Multiple times. 😭</p>
+      <textarea
+        id="opinion-text"
+        class="opinion-textarea"
+        placeholder="Be honest Florence... he can handle it (maybe) 😅"
+        maxlength="500"
+      ></textarea>
+      <p class="char-count" id="char-count">0 / 500</p>
+      <button class="btn-primary" onclick="submitOpinion()">Send it to Fidel 💌</button>
+      <button class="btn-ghost" onclick="goTo('screen-selfie')">Skip for now →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 10 — SELFIE ═══ -->
+  <section class="screen" id="screen-selfie">
+    <div class="screen-inner center-all">
+      <p class="section-label">One more thing 📸</p>
+      <h2 class="section-title">Drop your selfie here.<br/><span class="gold italic">You know you want to.</span></h2>
+      <p class="section-sub">It'll get a cute frame. Promise. 🌸</p>
+      <div class="selfie-frame" id="selfie-frame">
+        <div class="selfie-placeholder" id="selfie-placeholder">
+          <span>📷</span>
+          <p>Tap to add your photo</p>
+        </div>
+        <img id="selfie-preview" src="" alt="Florence" style="display:none" />
+        <div class="selfie-overlay-text" id="selfie-overlay" style="display:none">Florence 🤍</div>
+      </div>
+      <input type="file" id="selfie-input" accept="image/*" capture="user" style="display:none" onchange="handleSelfie(this)" />
+      <button class="btn-primary" onclick="document.getElementById('selfie-input').click()">Choose / Take Photo 📸</button>
+      <button class="btn-ghost" onclick="goTo('screen-game')">Skip →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 11 — HEART GAME ═══ -->
+  <section class="screen" id="screen-game">
+    <div class="screen-inner center-all">
+      <p class="section-label">A little something</p>
+      <h2 class="section-title">Catch the hearts<br/>before they fall 🤍</h2>
+      <p class="game-sub">Tap the falling hearts. Catch <strong>7</strong> to unlock the next part.</p>
+      <div id="game-arena" aria-label="Heart catching game">
+        <div id="game-score-display">0 / 7</div>
+      </div>
+      <button class="btn-ghost" id="skip-game-btn" onclick="goTo('screen-scratch')">Skip the game →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 12 — SCRATCH CARD ═══ -->
+  <section class="screen" id="screen-scratch">
+    <div class="screen-inner center-all">
+      <p class="section-label">A secret 🤫</p>
+      <h2 class="section-title">Scratch to reveal<br/><span class="gold italic">what Fidel thinks.</span></h2>
+      <p class="section-sub">Use your finger to scratch the card.</p>
+      <div class="scratch-wrapper">
+        <canvas id="scratch-canvas" width="300" height="160"></canvas>
+        <div class="scratch-reveal" id="scratch-reveal">
+          <p>Florence Gathoni,<br/>you are the most interesting person<br/>I have ever had the privilege<br/>of getting to know. 🤍</p>
+        </div>
+      </div>
+      <button class="btn-ghost" id="scratch-skip" onclick="revealScratch(); goTo('screen-proposal')">Reveal & continue →</button>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 13 — PROPOSAL ═══ -->
+  <section class="screen" id="screen-proposal">
+    <div class="screen-inner center-all">
+      <div class="proposal-petals" aria-hidden="true" id="proposal-petals"></div>
+      <p class="section-label">And so...</p>
+      <h2 class="proposal-question">
+        Florence Gathoni,<br/>
+        <span class="gold italic">can I be yours?</span>
+      </h2>
+      <p class="proposal-sub">No pressure. Just an honest question from someone who means every word above.</p>
+      <div class="proposal-btns">
+        <button class="btn-yes" onclick="handleAnswer('yes')">Yes, Fidel 🤍</button>
+        <button class="btn-maybe" onclick="handleAnswer('maybe')">Let me think 🌸</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 14a — AFTER YES ═══ -->
+  <section class="screen" id="screen-yes">
+    <div class="screen-inner center-all">
+      <div id="confetti-layer" aria-hidden="true"></div>
+      <h2 class="after-title gold">She said yes. 🥹🤍</h2>
+      <p class="after-msg">
+        Florence, you just made me the happiest person.<br/>
+        I promise to love you well, honestly, and with everything I have.<br/>
+        This is just the beginning. 🌹
+      </p>
+      <p class="after-small">Fidel is already smiling. A lot.</p>
+      <a class="btn-primary" href="https://wa.me/254729569010?text=Florence+said+YES+%F0%9F%A4%8D%F0%9F%A4%8D" target="_blank" rel="noopener">
+        Tell Fidel 💬
+      </a>
+      <a class="btn-ghost" href="gallery.html" style="margin-top:12px">Enter Our Space 🤍</a>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 14b — AFTER MAYBE ═══ -->
+  <section class="screen" id="screen-maybe">
+    <div class="screen-inner center-all">
+      <h2 class="after-title">That's okay, Florence. 🌸</h2>
+      <p class="after-msg">
+        Thinking is good. Feeling is good.<br/>
+        Whatever you decide, nothing changes about how I see you.<br/>
+        You're still someone I'm really glad exists. 🤍
+      </p>
+      <p class="after-small">No rush. No pressure. Ever.</p>
+      <a class="btn-ghost" href="https://wa.me/254729569010?text=Florence+is+thinking+about+it+%F0%9F%8C%B8" target="_blank" rel="noopener">
+        Let Fidel know 💬
+      </a>
+      <a class="btn-ghost" href="gallery.html" style="margin-top:12px">Enter Our Space 🤍</a>
+    </div>
+  </section>
+
+  <!-- HIDDEN FORMS -->
+  <form id="form-yes" action="https://formspree.io/f/xnppvley" method="POST" style="display:none">
+    <input name="answer" value="Florence said YES 🤍🎉" />
+    <input name="from" value="For Florence PWA" />
+  </form>
+  <form id="form-maybe" action="https://formspree.io/f/xnppvley" method="POST" style="display:none">
+    <input name="answer" value="Florence is thinking about it 🌸" />
+    <input name="from" value="For Florence PWA" />
+  </form>
+  <form id="form-rating" action="https://formspree.io/f/xnppvley" method="POST" style="display:none">
+    <input name="rating" id="form-rating-val" value="" />
+    <input name="from" value="For Florence PWA — Rating" />
+  </form>
+  <form id="form-opinion" action="https://formspree.io/f/xnppvley" method="POST" style="display:none">
+    <input name="opinion" id="form-opinion-val" value="" />
+    <input name="from" value="For Florence PWA — Opinion" />
+  </form>
+
+  <script src="/app.js"></script>
+  <script>
+    // Auth guard — if not logged in, go to login
+    if (!localStorage.getItem('ff_token')) {
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

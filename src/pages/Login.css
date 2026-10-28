@@ -1,0 +1,49 @@
+.login-bg {
+  min-height: 100dvh;
+  background: linear-gradient(160deg, #fff0f3 0%, #fce4ec 50%, #fdf6ee 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.login-card {
+  background: #fff; border-radius: 24px;
+  padding: 48px 36px; width: 100%; max-width: 380px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(139,58,82,.15);
+  animation: cardIn .6s cubic-bezier(.34,1.3,.64,1) both;
+}
+@keyframes cardIn {
+  from { opacity:0; transform: translateY(40px) scale(.95); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+.login-icon { font-size: 3rem; margin-bottom: 8px; display: block; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.login-card h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; color: #2d1f27; margin-bottom: 4px; }
+.login-sub { font-size: .88rem; color: #9a7a85; font-style: italic; margin-bottom: 28px; }
+.field { margin-bottom: 16px; text-align: left; }
+.field label { font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: #c9748a; display: block; margin-bottom: 6px; }
+.field input {
+  width: 100%; padding: 14px 18px;
+  border: 1.5px solid #f0c0cc; border-radius: 12px;
+  font-size: .95rem; color: #2d1f27; background: #fff8fa;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+  font-family: inherit;
+}
+.field input:focus { border-color: #c9748a; box-shadow: 0 0 0 3px rgba(201,116,138,.15); }
+.login-error { color: #e57373; font-size: .85rem; margin-bottom: 10px; }
+.btn-login {
+  width: 100%; padding: 16px;
+  background: linear-gradient(135deg, #c9748a, #8b3a52);
+  color: #fff; border: none; border-radius: 50px;
+  font-size: 1rem; font-weight: 500; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(201,116,138,.35);
+  transition: transform .2s; font-family: inherit;
+  position: relative; overflow: hidden;
+}
+.btn-login::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(105deg,transparent 40%,rgba(255,255,255,.3) 50%,transparent 60%);
+  transform:translateX(-100%); animation: shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer { 0%{transform:translateX(-100%)} 60%{transform:translateX(100%)} 100%{transform:translateX(100%)} }
+.btn-login:active { transform: scale(.97); }
+.btn-login:disabled { opacity: .7; cursor: not-allowed; }
