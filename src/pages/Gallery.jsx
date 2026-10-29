@@ -40,7 +40,7 @@ export default function Gallery() {
     <div className="gallery-page">
       {/* HEADER */}
       <header className="g-header">
-        <span className="g-logo">🤍 Our Space</span>
+        <span className="g-logo">🤍 Wetu</span>
         <div className="g-header-right">
           <span className="g-username">{user?.displayName}</span>
           <button className="btn-logout" onClick={logout}>↩</button>

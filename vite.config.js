@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
-        name: 'Our Space 🤍',
-        short_name: 'Our Space',
+        name: 'Wetu 🤍',
+        short_name: 'Wetu',
         description: 'A private space for Fidel & Florence',
         theme_color: '#c9748a',
         background_color: '#1a0a0f',

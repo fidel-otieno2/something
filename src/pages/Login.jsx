@@ -41,7 +41,7 @@ export default function Login() {
     <div className="login-bg">
       <div className="login-card">
         <div className="login-icon">🤍</div>
-        <h1>Our Space</h1>
+        <h1>Wetu</h1>
         <p className="login-sub">Just the two of us.</p>
         <form onSubmit={handleLogin}>
           <div className="field">
