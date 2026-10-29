@@ -16,7 +16,11 @@ export function AuthProvider({ children }) {
       const res  = await fetch(`${API}/profiles`, { headers: { Authorization: `Bearer ${tok}` } });
       const data = await res.json();
       const map  = {};
-      (data.profiles || []).forEach(p => { map[p.user_id] = p.avatar_url; });
+      (data.profiles || []).forEach(p => {
+        if (!p?.user_id || !p.avatar_url) return;
+        map[p.user_id] = p.avatar_url;
+        map[p.user_id.toLowerCase()] = p.avatar_url;
+      });
       setAvatars(map);
       localStorage.setItem('ff_avatars', JSON.stringify(map));
     } catch {
@@ -58,7 +62,7 @@ export function AuthProvider({ children }) {
   }
 
   function updateMyAvatar(url) {
-    const updated = { ...avatars, [user.id]: url };
+    const updated = { ...avatars, [user.id]: url, [String(user.id).toLowerCase()]: url };
     setAvatars(updated);
     localStorage.setItem('ff_avatars', JSON.stringify(updated));
   }

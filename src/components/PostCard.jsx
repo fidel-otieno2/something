@@ -70,7 +70,7 @@ export default function PostCard({ post, user, token, api, avatars, onReload, on
       {/* ── HEADER ── */}
       <div className="pc-header">
         <div className="pc-header-left">
-          <Avatar userId={post.user_id} username={post.username} avatars={avatars} size={32} />
+          <Avatar userId={post.user_id} username={post.username} avatars={avatars} src={post.avatar_url} size={32} />
           <span className="pc-username">{post.username}</span>
         </div>
         {isOwner && (
@@ -120,7 +120,7 @@ export default function PostCard({ post, user, token, api, avatars, onReload, on
         <div className="pc-comments">
           {comments.map(c => (
             <div key={c.id} className="pc-comment">
-              <Avatar userId={c.user_id} username={c.username} avatars={avatars} size={22} />
+              <Avatar userId={c.user_id} username={c.username} avatars={avatars} src={c.avatar_url} size={22} />
               <span className="pc-comment-body">
                 <span className="pc-cap-user">{c.username}</span> {c.text}
               </span>
@@ -137,7 +137,7 @@ export default function PostCard({ post, user, token, api, avatars, onReload, on
 
       {/* ── COMMENT INPUT ── */}
       <form className="pc-comment-form" onSubmit={submitComment}>
-        <Avatar userId={user.id} username={user.displayName} avatars={avatars} size={28} />
+        <Avatar userId={user.id} username={user.displayName} avatars={avatars} src={avatars?.[user.id]} size={28} />
         <input
           id={`ci-${post.id}`}
           className="pc-comment-input"

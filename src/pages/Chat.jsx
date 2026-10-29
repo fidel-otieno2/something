@@ -180,7 +180,7 @@ export default function Chat() {
               return (
                 <div key={msg.id} className={`chat-row ${mine ? 'mine' : 'theirs'}`}>
                   {!mine && (
-                    <Avatar userId={msg.user_id} username={msg.username} avatars={avatars} size={28} />
+                    <Avatar userId={msg.user_id} username={msg.username} avatars={avatars} src={msg.avatar_url} size={28} />
                   )}
                   <div className="chat-col">
                     {!mine && <span className="chat-name">{msg.username}</span>}
@@ -223,7 +223,7 @@ export default function Chat() {
                     )}
                   </div>
                   {mine && (
-                    <Avatar userId={msg.user_id} username={msg.username} avatars={avatars} size={28} />
+                    <Avatar userId={msg.user_id} username={msg.username} avatars={avatars} src={msg.avatar_url} size={28} />
                   )}
                 </div>
               );

@@ -46,10 +46,13 @@
 
 .chat-bubble {
   max-width: 100%;
-  padding: 8px 12px;
+  padding: 8px 12px 6px;
   border-radius: 18px;
   position: relative;
   word-break: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .bubble-mine {
   background: #c9748a;
@@ -132,14 +135,13 @@
 }
 .chat-mic.on { filter: drop-shadow(0 0 4px #c9748a); }
 
-.chat-text { font-size: .92rem; line-height: 1.45; margin: 0; padding-right: 36px; }
+.chat-text { font-size: .92rem; line-height: 1.45; margin: 0; }
 .chat-time {
   font-size: .65rem;
   opacity: .7;
-  position: absolute;
-  bottom: 6px;
-  right: 10px;
+  align-self: flex-end;
   white-space: nowrap;
+  line-height: 1;
 }
 .bubble-mine .chat-time  { color: #ffe0e8; }
 .bubble-theirs .chat-time { color: #9a7a85; }
