@@ -30,13 +30,22 @@
   display: flex;
   align-items: flex-end;
   gap: 6px;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
 }
 .chat-row.mine   { justify-content: flex-end; }
 .chat-row.theirs { justify-content: flex-start; }
+.chat-col { max-width: 78%; display: flex; flex-direction: column; }
+.chat-row.mine .chat-col { align-items: flex-end; }
+.chat-row.theirs .chat-col { align-items: flex-start; }
+.chat-name {
+  font-size: .68rem;
+  font-weight: 600;
+  color: #8b3a52;
+  margin: 0 8px 3px;
+}
 
 .chat-bubble {
-  max-width: 72%;
+  max-width: 100%;
   padding: 8px 12px;
   border-radius: 18px;
   position: relative;
@@ -62,6 +71,66 @@
   border-radius: 12px;
   display: block;
 }
+.chat-media audio {
+  width: min(220px, 100%);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.chat-react-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+  align-items: center;
+}
+.chat-pill,
+.chat-react-btn {
+  border: 1px solid #f0c0cc;
+  background: #fff;
+  border-radius: 12px;
+  font-size: .75rem;
+  padding: 1px 6px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.chat-pill.mine-pill {
+  background: #ffe4ec;
+  border-color: #c9748a;
+}
+.chat-react-btn { color: #9a7a85; }
+.chat-emoji-bar {
+  display: flex;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid #f0c0cc;
+  border-radius: 16px;
+  padding: 4px 6px;
+  margin-top: 4px;
+  box-shadow: 0 4px 16px #0001;
+}
+.chat-emoji-bar button {
+  background: none; border: none; font-size: 1.1rem; cursor: pointer; padding: 2px;
+}
+
+.chat-recording {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 16px;
+  background: #2a1020;
+  color: #fff;
+  font-size: .85rem;
+}
+.chat-recording button {
+  background: #c9748a; color: #fff; border: none;
+  border-radius: 16px; padding: 6px 12px; cursor: pointer; font-family: inherit;
+}
+.chat-mic {
+  background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 4px;
+}
+.chat-mic.on { filter: drop-shadow(0 0 4px #c9748a); }
 
 .chat-text { font-size: .92rem; line-height: 1.45; margin: 0; padding-right: 36px; }
 .chat-time {
@@ -81,11 +150,13 @@
   padding: 8px 12px 0;
   background: #fff;
 }
-.chat-img-preview img {
+.chat-img-preview img,
+.chat-img-preview video {
   height: 80px;
   border-radius: 10px;
   object-fit: cover;
 }
+.chat-img-preview audio { width: 180px; }
 .chat-img-preview button {
   position: absolute;
   top: 4px; right: 8px;

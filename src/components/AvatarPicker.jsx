@@ -5,15 +5,18 @@ import './AvatarPicker.css';
 
 const API = import.meta.env.VITE_API_URL;
 
-export default function AvatarPicker({ size = 36, alwaysShowCamera = false }) {
+export default function AvatarPicker({ size = 36, alwaysShowCamera = false, showActions = false }) {
   const { token, user, avatars, updateMyAvatar, fetchAvatars } = useAuth();
   const [uploading, setUploading] = useState(false);
-  const fileRef = useRef();
+  const [menu, setMenu] = useState(false);
+  const cameraRef = useRef();
+  const galleryRef = useRef();
 
   async function handleFile(e) {
     const f = e.target.files[0];
     if (!f) return;
     setUploading(true);
+    setMenu(false);
     const fd = new FormData();
     fd.append('file', f);
     try {
@@ -34,15 +37,26 @@ export default function AvatarPicker({ size = 36, alwaysShowCamera = false }) {
     }
   }
 
+  const actions = (
+    <div className={`ap-actions ${showActions ? 'ap-actions-row' : 'ap-actions-menu'}`}>
+      <button type="button" onClick={() => cameraRef.current.click()}>Take photo</button>
+      <button type="button" onClick={() => galleryRef.current.click()}>From gallery</button>
+    </div>
+  );
+
   return (
-    <div
-      className={`ap-wrap ${alwaysShowCamera ? 'ap-always' : ''}`}
-      onClick={() => fileRef.current.click()}
-      title="Change profile photo"
-    >
-      <Avatar userId={user.id} username={user.displayName} avatars={avatars} size={size} />
-      <div className="ap-overlay">{uploading ? '...' : '📷'}</div>
-      <input ref={fileRef} type="file" accept="image/*" capture="user" style={{ display: 'none' }} onChange={handleFile} />
+    <div className="ap-root">
+      <div
+        className={`ap-wrap ${alwaysShowCamera ? 'ap-always' : ''}`}
+        onClick={() => { if (!showActions) setMenu(open => !open); }}
+        title="Change profile photo"
+      >
+        <Avatar userId={user.id} username={user.displayName} avatars={avatars} size={size} />
+        <div className="ap-overlay">{uploading ? '...' : '📷'}</div>
+      </div>
+      {showActions ? actions : menu ? actions : null}
+      <input ref={cameraRef} type="file" accept="image/*" capture="user" style={{ display: 'none' }} onChange={handleFile} />
+      <input ref={galleryRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFile} />
     </div>
   );
 }

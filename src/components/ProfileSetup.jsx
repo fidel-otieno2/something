@@ -20,9 +20,9 @@ export default function ProfileSetup() {
         <h2>Choose your photo</h2>
         <p>This picture shows up in messages, posts, comments, and notifications.</p>
         <div className="ps-picker">
-          <AvatarPicker size={96} alwaysShowCamera />
+          <AvatarPicker size={96} alwaysShowCamera showActions />
         </div>
-        <p className="ps-hint">Tap the circle to pick a photo</p>
+        <p className="ps-hint">Take a photo or pick one from your gallery</p>
         <button className="ps-skip" onClick={skip}>Skip for now</button>
       </div>
     </div>

@@ -74,7 +74,7 @@ export default function PostCard({ post, user, token, api, avatars, onReload, on
           <span className="pc-username">{post.username}</span>
         </div>
         {isOwner && (
-          <button className="pc-more" onClick={deletePost} title="Delete">•••</button>
+          <button className="pc-delete" onClick={deletePost} title="Delete this post">Delete</button>
         )}
       </div>
 

@@ -43,7 +43,7 @@ export default function Gallery() {
     <div className="gallery-page">
       <div className="upload-bar">
         <div className="upload-inner">
-          <AvatarPicker alwaysShowCamera />
+          <AvatarPicker alwaysShowCamera showActions={false} />
           <button className="upload-trigger" onClick={() => setShowUpload(true)}>
             Share a moment, photo or video... 🌸
           </button>

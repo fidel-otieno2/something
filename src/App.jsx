@@ -7,7 +7,7 @@ import Chat          from './pages/Chat';
 import BottomNav     from './components/BottomNav';
 import InstallPrompt from './components/InstallPrompt';
 import ProfileSetup  from './components/ProfileSetup';
-import { usePushNotifications } from './hooks/usePushNotifications';
+import NotificationPrompt from './components/NotificationPrompt';
 
 function PrivateRoute({ children }) {
   const { token } = useAuth();
@@ -27,7 +27,6 @@ function Layout() {
   const { token } = useAuth();
   const { pathname } = useLocation();
   const showNav = token && pathname !== '/login' && pathname !== '/slides';
-  usePushNotifications(token);
 
   return (
     <>
@@ -41,6 +40,7 @@ function Layout() {
       </Routes>
       {showNav && <BottomNav />}
       {showNav && <ProfileSetup />}
+      {showNav && <NotificationPrompt />}
     </>
   );
 }
