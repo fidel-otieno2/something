@@ -71,7 +71,6 @@ export default function PostCard({ post, user, token, api, avatars, onReload, on
       <div className="pc-header">
         <div className="pc-header-left">
           <Avatar userId={post.user_id} username={post.username} avatars={avatars} src={post.avatar_url} size={32} />
-          <span className="pc-username">{post.username}</span>
         </div>
         {isOwner && (
           <button className="pc-delete" onClick={deletePost} title="Delete this post">Delete</button>
@@ -110,9 +109,7 @@ export default function PostCard({ post, user, token, api, avatars, onReload, on
 
       {/* ── CAPTION ── */}
       {post.caption && (
-        <div className="pc-caption">
-          <span className="pc-cap-user">{post.username}</span> {post.caption}
-        </div>
+        <div className="pc-caption">{post.caption}</div>
       )}
 
       {/* ── COMMENTS ── */}

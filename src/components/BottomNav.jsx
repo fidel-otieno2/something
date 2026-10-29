@@ -7,7 +7,12 @@ export default function BottomNav() {
   const { logout, user } = useAuth();
   return (
     <nav className="top-nav">
-      <span className="top-nav-logo">FloRish 🤍</span>
+      <div className="top-nav-brand">
+        <span className="top-nav-logo">FloRish 🤍</span>
+        <NavLink to="/slides" className="top-nav-story" title="Replay the proposal from the start">
+          Proposal
+        </NavLink>
+      </div>
       <div className="top-nav-tabs">
         <NavLink to="/gallery" className={({ isActive }) => isActive ? 'tab active' : 'tab'}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

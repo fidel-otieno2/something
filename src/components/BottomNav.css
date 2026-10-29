@@ -15,12 +15,40 @@
   z-index: 200;
 }
 
+.top-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
 .top-nav-logo {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: #8b3a52;
   letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+.top-nav-story {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #f0c0cc;
+  background: #fff8fa;
+  color: #c9748a;
+  text-decoration: none;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.top-nav-story:hover,
+.top-nav-story.active {
+  background: #c9748a;
+  border-color: #c9748a;
+  color: #fff;
 }
 
 .top-nav-tabs {
@@ -59,3 +87,8 @@
   color: #c9a0aa;
 }
 .logout-tab:hover { color: #c9748a; }
+
+@media (max-width: 420px) {
+  .top-nav { padding-left: 12px; }
+  .tab { padding: 8px 8px; }
+}
