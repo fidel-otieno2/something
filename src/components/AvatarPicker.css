@@ -1,0 +1,22 @@
+.ap-wrap {
+  position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ap-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #0004;
+  color: #fff;
+  font-size: .7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.ap-wrap:hover .ap-overlay,
+.ap-always .ap-overlay,
+.ap-wrap:focus-within .ap-overlay { opacity: 1; }

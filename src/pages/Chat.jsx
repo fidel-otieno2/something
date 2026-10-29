@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '../AuthContext';
 import { supabase } from '../supabase';
+import Avatar from '../components/Avatar';
+import AvatarPicker from '../components/AvatarPicker';
 import './Chat.css';
 
 const API = import.meta.env.VITE_API_URL;
 
 export default function Chat() {
-  const { token, user } = useAuth();
+  const { token, user, avatars } = useAuth();
   const [messages, setMessages] = useState([]);
   const [text,     setText]     = useState('');
   const [sending,  setSending]  = useState(false);
@@ -81,17 +83,6 @@ export default function Chat() {
 
   return (
     <div className="chat-page">
-      <header className="chat-header">
-        <div className="chat-header-avatar">
-          {user?.id === 'fidel' ? 'F' : 'F'}
-        </div>
-        <div className="chat-header-info">
-          <div className="chat-header-name">
-            {user?.id === 'fidel' ? 'Florence 🤍' : 'Fidel 🤍'}
-          </div>
-          <div className="chat-header-sub">FloRish</div>
-        </div>
-      </header>
 
       <div className="chat-body">
         {Object.entries(grouped).map(([day, msgs]) => (
@@ -101,6 +92,9 @@ export default function Chat() {
               const mine = msg.user_id === user.id;
               return (
                 <div key={msg.id} className={`chat-row ${mine ? 'mine' : 'theirs'}`}>
+                  {!mine && (
+                    <Avatar userId={msg.user_id} username={msg.username} avatars={avatars} size={28} />
+                  )}
                   <div className={`chat-bubble ${mine ? 'bubble-mine' : 'bubble-theirs'}`}>
                     {msg.media_url && (
                       <div className="chat-media">
@@ -113,6 +107,9 @@ export default function Chat() {
                     {msg.text && <p className="chat-text">{msg.text}</p>}
                     <span className="chat-time">{fmt(msg.created_at)}</span>
                   </div>
+                  {mine && (
+                    <Avatar userId={msg.user_id} username={msg.username} avatars={avatars} size={28} />
+                  )}
                 </div>
               );
             })}
@@ -129,6 +126,7 @@ export default function Chat() {
       )}
 
       <form className="chat-input-bar" onSubmit={send}>
+        <AvatarPicker size={32} />
         <button type="button" className="chat-attach" onClick={() => fileRef.current.click()}>📎</button>
         <input ref={fileRef} type="file" accept="image/*,video/*" style={{ display: 'none' }} onChange={pickImage} />
         <input

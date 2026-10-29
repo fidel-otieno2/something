@@ -1,21 +1,6 @@
-.gallery-page { background: #fff0f3; min-height: 100dvh; }
+.gallery-page { background: #fff0f3; min-height: 100dvh; padding-top: calc(56px + env(safe-area-inset-top)); }
 
-.g-header {
-  position: fixed; top: 0; left: 0; right: 0;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid #f0c0cc;
-  z-index: 100; padding: env(safe-area-inset-top,0) 0 0;
-}
-.g-header > * { display: flex; } /* fallback */
-.g-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
-.g-logo { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #8b3a52; }
-.g-header-right { display: flex; align-items: center; gap: 12px; }
-.g-username { font-size: .82rem; color: #9a7a85; font-weight: 500; }
-.btn-logout { background: none; border: 1.5px solid #f0c0cc; border-radius: 50px; padding: 6px 14px; font-size: .82rem; color: #c9748a; cursor: pointer; font-family: inherit; }
-.btn-logout:active { background: #fce4ec; }
-
-.upload-bar { max-width: 600px; margin: 0 auto; padding: 12px 16px; margin-top: 64px; }
+.upload-bar { max-width: 600px; margin: 0 auto; padding: 12px 16px; }
 .upload-inner { background: #fff; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 24px rgba(139,58,82,.1); border: 1.5px solid #f0c0cc; }
 .avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg,#c9748a,#8b3a52); display: flex; align-items: center; justify-content: center; color: #fff; font-size: .85rem; font-weight: 600; flex-shrink: 0; }
 .upload-trigger { flex: 1; text-align: left; font-family: inherit; font-size: .9rem; color: #9a7a85; cursor: pointer; background: none; border: none; }

@@ -109,11 +109,12 @@
   font-size: .875rem;
   line-height: 1.5;
   color: #262626;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
   display: flex;
-  align-items: baseline;
-  gap: 4px;
+  align-items: flex-start;
+  gap: 8px;
 }
+.pc-comment-body { flex: 1; min-width: 0; }
 .pc-del-comment {
   background: none; border: none; cursor: pointer;
   color: #8e8e8e; font-size: .85rem; margin-left: auto;

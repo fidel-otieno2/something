@@ -6,6 +6,7 @@ import Gallery       from './pages/Gallery';
 import Chat          from './pages/Chat';
 import BottomNav     from './components/BottomNav';
 import InstallPrompt from './components/InstallPrompt';
+import ProfileSetup  from './components/ProfileSetup';
 import { usePushNotifications } from './hooks/usePushNotifications';
 
 function PrivateRoute({ children }) {
@@ -39,6 +40,7 @@ function Layout() {
         <Route path="*"        element={<Navigate to="/" replace />} />
       </Routes>
       {showNav && <BottomNav />}
+      {showNav && <ProfileSetup />}
     </>
   );
 }

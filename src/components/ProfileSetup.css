@@ -1,0 +1,53 @@
+.ps-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(38, 18, 24, .45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.ps-card {
+  width: min(360px, 100%);
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px 20px;
+  text-align: center;
+  box-shadow: 0 16px 48px rgba(139, 58, 82, .22);
+}
+
+.ps-card h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.6rem;
+  color: #8b3a52;
+  margin-bottom: 8px;
+}
+
+.ps-card p {
+  color: #9a7a85;
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.ps-picker {
+  display: flex;
+  justify-content: center;
+  margin: 22px 0 10px;
+}
+
+.ps-hint {
+  font-size: .78rem !important;
+  margin-bottom: 16px;
+}
+
+.ps-skip {
+  background: none;
+  border: none;
+  color: #c9748a;
+  font-family: inherit;
+  font-size: .88rem;
+  cursor: pointer;
+  padding: 8px 12px;
+}

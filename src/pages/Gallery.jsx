@@ -4,12 +4,13 @@ import { supabase } from '../supabase';
 import PostCard from '../components/PostCard';
 import UploadModal from '../components/UploadModal';
 import Viewer from '../components/Viewer';
+import AvatarPicker from '../components/AvatarPicker';
 import './Gallery.css';
 
 const API = import.meta.env.VITE_API_URL;
 
 export default function Gallery() {
-  const { token, user, logout } = useAuth();
+  const { token, user, logout, avatars } = useAuth();
   const [posts,      setPosts]      = useState([]);
   const [loading,    setLoading]    = useState(true);
   const [showUpload, setShowUpload] = useState(false);
@@ -17,9 +18,7 @@ export default function Gallery() {
 
   const loadPosts = useCallback(async () => {
     try {
-      const res = await fetch(`${API}/posts`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await fetch(`${API}/posts`, { headers: { Authorization: `Bearer ${token}` } });
       if (res.status === 401) { logout(); return; }
       const data = await res.json();
       setPosts(data.posts || []);
@@ -32,29 +31,19 @@ export default function Gallery() {
 
   useEffect(() => {
     loadPosts();
-
     const channel = supabase.channel('gallery')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'posts' },     loadPosts)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'reactions' }, loadPosts)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'comments' },  loadPosts)
       .subscribe();
-
     return () => supabase.removeChannel(channel);
   }, [loadPosts]);
 
   return (
     <div className="gallery-page">
-      <header className="g-header">
-        <span className="g-logo">🤍 FloRish</span>
-        <div className="g-header-right">
-          <span className="g-username">{user?.displayName}</span>
-          <button className="btn-logout" onClick={logout}>↩</button>
-        </div>
-      </header>
-
       <div className="upload-bar">
         <div className="upload-inner">
-          <div className="avatar">{user?.displayName?.[0]?.toUpperCase()}</div>
+          <AvatarPicker alwaysShowCamera />
           <button className="upload-trigger" onClick={() => setShowUpload(true)}>
             Share a moment, photo or video... 🌸
           </button>
@@ -77,6 +66,7 @@ export default function Gallery() {
               user={user}
               token={token}
               api={API}
+              avatars={avatars}
               onReload={loadPosts}
               onOpenViewer={setViewer}
               index={i}

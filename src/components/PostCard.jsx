@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Avatar from './Avatar';
 import './PostCard.css';
 
 function timeAgo(d) {
@@ -12,7 +13,7 @@ function timeAgo(d) {
   return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
-export default function PostCard({ post, user, token, api, onReload, onOpenViewer, index }) {
+export default function PostCard({ post, user, token, api, avatars, onReload, onOpenViewer, index }) {
   const [comment,   setComment]   = useState('');
   const [hearted,   setHearted]   = useState(false); // double-tap animation
   const [submitting, setSubmitting] = useState(false);
@@ -69,7 +70,7 @@ export default function PostCard({ post, user, token, api, onReload, onOpenViewe
       {/* ── HEADER ── */}
       <div className="pc-header">
         <div className="pc-header-left">
-          <div className="pc-avatar">{post.username[0].toUpperCase()}</div>
+          <Avatar userId={post.user_id} username={post.username} avatars={avatars} size={32} />
           <span className="pc-username">{post.username}</span>
         </div>
         {isOwner && (
@@ -119,7 +120,10 @@ export default function PostCard({ post, user, token, api, onReload, onOpenViewe
         <div className="pc-comments">
           {comments.map(c => (
             <div key={c.id} className="pc-comment">
-              <span className="pc-cap-user">{c.username}</span> {c.text}
+              <Avatar userId={c.user_id} username={c.username} avatars={avatars} size={22} />
+              <span className="pc-comment-body">
+                <span className="pc-cap-user">{c.username}</span> {c.text}
+              </span>
               {c.user_id === user.id && (
                 <button className="pc-del-comment" onClick={() => deleteComment(c.id)}>×</button>
               )}
@@ -133,7 +137,7 @@ export default function PostCard({ post, user, token, api, onReload, onOpenViewe
 
       {/* ── COMMENT INPUT ── */}
       <form className="pc-comment-form" onSubmit={submitComment}>
-        <div className="pc-my-avatar">{user.displayName[0].toUpperCase()}</div>
+        <Avatar userId={user.id} username={user.displayName} avatars={avatars} size={28} />
         <input
           id={`ci-${post.id}`}
           className="pc-comment-input"
