@@ -24,14 +24,16 @@ export default function UploadModal({ token, api, onClose, onPosted }) {
     if (file) fd.append('file', file);
     if (caption.trim()) fd.append('caption', caption.trim());
     try {
-      await fetch(`${api}/posts`, {
+      const res = await fetch(`${api}/posts`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: fd
       });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed');
       onPosted();
-    } catch {
-      alert('Upload failed. Try again.');
+    } catch (err) {
+      alert(err.message || 'Upload failed. Try again.');
       setPosting(false);
     }
   }

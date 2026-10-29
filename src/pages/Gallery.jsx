@@ -16,11 +16,14 @@ export default function Gallery() {
   const [viewer,      setViewer]      = useState(null); // { type, url }
 
   async function loadPosts() {
-    const res  = await fetch(`${API}/posts`, { headers: { Authorization: `Bearer ${token}` } });
-    if (res.status === 401) { logout(); return; }
-    const data = await res.json();
-    setPosts(data.posts || []);
-    setLoading(false);
+    try {
+      const res  = await fetch(`${API}/posts`, { headers: { Authorization: `Bearer ${token}` } });
+      if (res.status === 401) { logout(); return; }
+      const data = await res.json();
+      setPosts(data.posts || []);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
