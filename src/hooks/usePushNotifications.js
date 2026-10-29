@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
-const API = import.meta.env.VITE_API_URL;
+const API        = import.meta.env.VITE_API_URL;
+const VAPID_KEY  = import.meta.env.VITE_VAPID_PUBLIC_KEY;
 
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
@@ -31,12 +32,9 @@ export function usePushNotifications(token) {
         const permission = await Notification.requestPermission();
         if (permission !== 'granted') return;
 
-        const res     = await fetch(`${API}/push/vapid-key`);
-        const { key } = await res.json();
-
         const subscription = await reg.pushManager.subscribe({
           userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(key),
+          applicationServerKey: urlBase64ToUint8Array(VAPID_KEY),
         });
 
         await sendToServer(subscription, token);
