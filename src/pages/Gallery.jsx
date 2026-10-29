@@ -45,7 +45,7 @@ export default function Gallery() {
   return (
     <div className="gallery-page">
       <header className="g-header">
-        <span className="g-logo">🤍 Wetu</span>
+        <span className="g-logo">🤍 FloRish</span>
         <div className="g-header-right">
           <span className="g-username">{user?.displayName}</span>
           <button className="btn-logout" onClick={logout}>↩</button>

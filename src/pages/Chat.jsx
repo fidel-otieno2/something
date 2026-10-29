@@ -89,7 +89,7 @@ export default function Chat() {
           <div className="chat-header-name">
             {user?.id === 'fidel' ? 'Florence 🤍' : 'Fidel 🤍'}
           </div>
-          <div className="chat-header-sub">Wetu</div>
+          <div className="chat-header-sub">FloRish</div>
         </div>
       </header>
 
