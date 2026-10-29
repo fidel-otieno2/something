@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../AuthContext';
 import { supabase } from '../supabase';
 import PostCard from '../components/PostCard';
@@ -10,35 +10,40 @@ const API = import.meta.env.VITE_API_URL;
 
 export default function Gallery() {
   const { token, user, logout } = useAuth();
-  const [posts,       setPosts]       = useState([]);
-  const [loading,     setLoading]     = useState(true);
-  const [showUpload,  setShowUpload]  = useState(false);
-  const [viewer,      setViewer]      = useState(null); // { type, url }
+  const [posts,      setPosts]      = useState([]);
+  const [loading,    setLoading]    = useState(true);
+  const [showUpload, setShowUpload] = useState(false);
+  const [viewer,     setViewer]     = useState(null);
 
-  async function loadPosts() {
+  const loadPosts = useCallback(async () => {
     try {
-      const res  = await fetch(`${API}/posts`, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch(`${API}/posts`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       if (res.status === 401) { logout(); return; }
       const data = await res.json();
       setPosts(data.posts || []);
+    } catch (e) {
+      console.error('loadPosts error', e);
     } finally {
       setLoading(false);
     }
-  }
+  }, [token]);
 
   useEffect(() => {
     loadPosts();
+
     const channel = supabase.channel('gallery')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'posts' },    () => loadPosts())
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'reactions' }, () => loadPosts())
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'comments' },  () => loadPosts())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'posts' },     loadPosts)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'reactions' }, loadPosts)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'comments' },  loadPosts)
       .subscribe();
+
     return () => supabase.removeChannel(channel);
-  }, []);
+  }, [loadPosts]);
 
   return (
     <div className="gallery-page">
-      {/* HEADER */}
       <header className="g-header">
         <span className="g-logo">🤍 Wetu</span>
         <div className="g-header-right">
@@ -47,7 +52,6 @@ export default function Gallery() {
         </div>
       </header>
 
-      {/* UPLOAD TRIGGER */}
       <div className="upload-bar">
         <div className="upload-inner">
           <div className="avatar">{user?.displayName?.[0]?.toUpperCase()}</div>
@@ -57,7 +61,6 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* FEED */}
       <main className="feed">
         {loading ? (
           <div className="feed-loading"><span className="spinner" /></div>
@@ -91,7 +94,9 @@ export default function Gallery() {
         />
       )}
 
-      {viewer && <Viewer type={viewer.type} url={viewer.url} onClose={() => setViewer(null)} />}
+      {viewer && (
+        <Viewer type={viewer.type} url={viewer.url} onClose={() => setViewer(null)} />
+      )}
     </div>
   );
 }
