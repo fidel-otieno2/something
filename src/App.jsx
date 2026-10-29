@@ -1,8 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './AuthContext';
 import Login         from './pages/Login';
 import Slides        from './pages/Slides';
 import Gallery       from './pages/Gallery';
+import Chat          from './pages/Chat';
+import BottomNav     from './components/BottomNav';
 import InstallPrompt from './components/InstallPrompt';
 
 function PrivateRoute({ children }) {
@@ -19,18 +21,32 @@ function RootRedirect() {
   return <Navigate to="/gallery" replace />;
 }
 
+function Layout() {
+  const { token } = useAuth();
+  const { pathname } = useLocation();
+  const showNav = token && pathname !== '/login' && pathname !== '/slides';
+
+  return (
+    <>
+      <Routes>
+        <Route path="/"        element={<RootRedirect />} />
+        <Route path="/login"   element={<Login />} />
+        <Route path="/slides"  element={<PrivateRoute><Slides /></PrivateRoute>} />
+        <Route path="/gallery" element={<PrivateRoute><Gallery /></PrivateRoute>} />
+        <Route path="/chat"    element={<PrivateRoute><Chat /></PrivateRoute>} />
+        <Route path="*"        element={<Navigate to="/" replace />} />
+      </Routes>
+      {showNav && <BottomNav />}
+    </>
+  );
+}
+
 export default function App() {
   return (
     <AuthProvider>
       <InstallPrompt />
       <BrowserRouter>
-        <Routes>
-          <Route path="/"        element={<RootRedirect />} />
-          <Route path="/login"   element={<Login />} />
-          <Route path="/slides"  element={<PrivateRoute><Slides /></PrivateRoute>} />
-          <Route path="/gallery" element={<PrivateRoute><Gallery /></PrivateRoute>} />
-          <Route path="*"        element={<Navigate to="/" replace />} />
-        </Routes>
+        <Layout />
       </BrowserRouter>
     </AuthProvider>
   );
